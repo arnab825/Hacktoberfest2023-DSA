@@ -1,0 +1,94 @@
+/*Problem
+You are given a piece of Java code. You have to complete the code by writing down the handlers for exceptions thrown by the code. The exceptions the code may throw along with the handler message are listed below:
+
+Division by zero: Print "Invalid division".
+String parsed to a numeric variable : Print "Format mismatch".
+Accessing an invalid index in string : Print "Index is invalid".
+Accessing an invalid index in array : Print "Array index is invalid".
+
+MyException : This is a user defined Exception which you need to create. It takes a parameter 
+. When an exception of this class is encountered, the handler should print "MyException[param]", here 
+ is the parameter passed to the exception class.
+
+Exceptions other than mentioned above : Any other exception except the above ones fall in this category. Print "Exception encountered".
+
+Finally, after the exception is handled, print "Exception Handling Completed".
+
+Example: For an exception of MyException class if the parameter value is 5, the message will look like
+MyException[5].
+
+Input Format:
+The code handles all the input itself.
+
+Output Format:
+If any exception is encountered in the code, print the respective handler code.
+The last line of output should be "Exception Handling Completed". */
+
+import java.util.*;
+class MyException extends Exception{
+    int param;
+public MyException(int param){
+    this.param=param;
+}
+public int getparam()
+{
+    return param;
+}
+}
+
+public class ExceptionHandle 
+{
+    public static void main(String[] args) {
+        Scanner sc=new Scanner(System.in);
+        int a,b,ch;
+        System.out.print("Enter the value of a:");
+        a=sc.nextInt();
+        System.out.print("Enter the value of b:");
+        b=sc.nextInt();
+        
+        try{
+            System.out.println("Enter your choice:");
+            ch=sc.nextInt();
+           sc.close();
+        switch(ch)
+        {
+            case 1: if(b==0)
+                    {
+                        throw new ArithmeticException("Division by zero");
+                    }
+                    int result=a/b;
+                    System.out.println("Division Value is "+result);
+                    break;
+            case 2: String str="Hello Virat";
+                    int num=Integer.parseInt(str);
+                    System.out.println("String parsed to a numeric variable "+num);
+                    break;
+            case 3: String id="Exception Handle";
+                    char c=id.charAt(10);
+                    System.out.println("Accessing an index in string "+c);
+                    break;
+            case 4: int arr[]={10,20,30,40,50};
+                    int value=arr[5];
+                    System.out.println("Accessing an index in array "+value);
+                    break;
+            case 5: throw new MyException(5);
+            default:throw new Exception("Wrong Choice");
+        
+       }
+        } catch (ArithmeticException e) {
+            System.out.println("Invalid division");
+        } catch (NumberFormatException e) {
+            System.out.println("Format mismatch");
+        } catch (StringIndexOutOfBoundsException e) {
+            System.out.println("Index is invalid");
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("Array index is invalid");
+        } catch (MyException e) {
+            System.out.println("MyException[" + e.param + "]");
+        } catch (Exception e) {
+            System.out.println("Exception encountered");
+        } finally {
+            System.out.println("Exception Handling Completed");
+        }
+    }
+}
